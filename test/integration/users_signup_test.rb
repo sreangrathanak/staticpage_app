@@ -9,12 +9,14 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
   	name="Sreang Rathanak"
   	email="jame@yahoo.com"
   	password="password"
-  	assert_no_difference 'User.count',1 do
-  		post users_path, user:{ name:"", 
-  								email:"user@invalid",
-  								password:"foo",
-  								password_confirmation:"bar"}
+  	assert_difference 'User.count',1 do
+  		post users_path, user:{ name:name, 
+  								email:email,
+  								password:password,
+  								password_confirmation:password}
   	end
   	assert_template 'users/new'
+    #assert_template 'users/show'
+    assert is_logged_in?
   end
 end
