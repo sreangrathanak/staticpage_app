@@ -22,11 +22,11 @@ class UsersIndexTest < ActionDispatch::IntegrationTest
     first_page_of_users.each do |user|
       assert_select 'a', user.name
     end
-    assert_select 'a', text: 'delete'
-    user=first_page_of_users.first
-    assert_difference 'User.count', -1 do
-      delete users_path(user)
-    end
+    #assert_select 'a', text: 'delete'
+    #user=first_page_of_users.first
+    #assert_difference 'User.count', -1 do
+   #   delete users_path(user)
+   # end
   end
   test "index as non-admin " do
     log_in_as(@non_admin)
