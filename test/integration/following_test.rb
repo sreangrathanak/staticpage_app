@@ -27,11 +27,11 @@ class FollowingTest < ActionDispatch::IntegrationTest
   end
   test "should follow a user" do
     assert_difference '@user.following.count', 1 do
-  #    post relationships_path, followed_id: @other.id
+      post relationships_path, followed_id: @other.id
     end
     @user.unfollow(@other)
     assert_difference '@user.following.count', 1 do
-  #    xhr :post, relationships_path, followed_id: @other.id
+      xhr :post, relationships_path, followed_id: @other.id
     end
   end
 
@@ -39,14 +39,14 @@ class FollowingTest < ActionDispatch::IntegrationTest
     @user.follow(@other)
     relationship = @user.active_relationships.find_by(followed_id: @other.id)
     assert_difference '@user.following.count', -1 do
-  #    delete relationship_path(relationship),
-  #           relationship: relationship.id
+      delete relationship_path(relationship),
+             relationship: relationship.id
     end
     @user.follow(@other)
     relationship = @user.active_relationships.find_by(followed_id: @other.id)
     assert_difference '@user.following.count', -1 do
-  #    xhr :delete, relationship_path(relationship),
-  #                 relationship: relationship.id
+      xhr :delete, relationship_path(relationship),
+                   relationship: relationship.id
     end
   end
 end
